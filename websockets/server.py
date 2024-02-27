@@ -307,10 +307,8 @@ class WebSocketServerProtocol(WebSocketCommonProtocol):
 
         if header_values is not None and available_extensions is not None:
 
-            parsed_header_values = sum([
-                parse_extension_list(header_value)
-                for header_value in header_values
-            ], [])
+            parsed_header_values = sum(parse_extension_list(header_value)
+                for header_value in header_values)
 
             for name, request_params in parsed_header_values:
 
@@ -361,10 +359,8 @@ class WebSocketServerProtocol(WebSocketCommonProtocol):
 
         if header_values is not None and available_subprotocols is not None:
 
-            parsed_header_values = sum([
-                parse_protocol_list(header_value)
-                for header_value in header_values
-            ], [])
+            parsed_header_values = sum(parse_protocol_list(header_value)
+                for header_value in header_values)
 
             subprotocol = self.select_subprotocol(
                 parsed_header_values,

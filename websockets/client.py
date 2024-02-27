@@ -122,10 +122,8 @@ class WebSocketClientProtocol(WebSocketCommonProtocol):
             if available_extensions is None:
                 raise InvalidHandshake("No extensions supported")
 
-            parsed_header_values = sum([
-                parse_extension_list(header_value)
-                for header_value in header_values
-            ], [])
+            parsed_header_values = sum(parse_extension_list(header_value)
+                for header_value in header_values)
 
             for name, response_params in parsed_header_values:
 
@@ -176,10 +174,8 @@ class WebSocketClientProtocol(WebSocketCommonProtocol):
             if available_subprotocols is None:
                 raise InvalidHandshake("No subprotocols supported")
 
-            parsed_header_values = sum([
-                parse_protocol_list(header_value)
-                for header_value in header_values
-            ], [])
+            parsed_header_values = sum(parse_protocol_list(header_value)
+                for header_value in header_values)
 
             if len(parsed_header_values) > 1:
                 raise InvalidHandshake(
