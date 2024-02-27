@@ -36,9 +36,9 @@ To open a connection, a client must:
 
 import base64
 import hashlib
-import random
 
 from .exceptions import InvalidHandshake
+import secrets
 
 
 __all__ = [
@@ -56,7 +56,7 @@ def build_request(set_header):
     Return the ``key`` which must be passed to :func:`check_response`.
 
     """
-    rand = bytes(random.getrandbits(8) for _ in range(16))
+    rand = bytes(secrets.SystemRandom().getrandbits(8) for _ in range(16))
     key = base64.b64encode(rand).decode()
     set_header('Upgrade', 'websocket')
     set_header('Connection', 'Upgrade')

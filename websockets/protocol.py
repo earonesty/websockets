@@ -11,7 +11,6 @@ import asyncio.queues
 import codecs
 import collections
 import logging
-import random
 import struct
 
 from .compatibility import asyncio_ensure_future
@@ -20,6 +19,7 @@ from .exceptions import (
 )
 from .framing import *
 from .handshake import *
+import secrets
 
 
 __all__ = ['WebSocketCommonProtocol']
@@ -419,7 +419,7 @@ class WebSocketCommonProtocol(asyncio.StreamReaderProtocol):
 
         # Generate a unique random payload otherwise.
         while data is None or data in self.pings:
-            data = struct.pack('!I', random.getrandbits(32))
+            data = struct.pack('!I', secrets.SystemRandom().getrandbits(32))
 
         self.pings[data] = asyncio.Future(loop=self.loop)
 
