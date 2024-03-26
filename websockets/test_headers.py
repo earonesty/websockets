@@ -55,7 +55,7 @@ class HeadersTests(unittest.TestCase):
         for header in [
             # Truncated examples
             '',
-            ',\t,'
+            ',\t,',
             'foo;',
             'foo; bar;',
             'foo; bar=',
@@ -96,8 +96,7 @@ class HeadersTests(unittest.TestCase):
         for header in [
             # Truncated examples
             '',
-            ',\t,'
-            # Wrong delimiter
+            ',\t,',
             'foo; bar',
         ]:
             with self.subTest(header=header):
