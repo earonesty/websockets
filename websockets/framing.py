@@ -12,10 +12,10 @@ of frames is implemented in :mod:`websockets.protocol`.
 import asyncio
 import collections
 import io
-import random
 import struct
 
 from .exceptions import PayloadTooBig, WebSocketProtocolError
+import secrets
 
 
 try:
@@ -192,7 +192,7 @@ class Frame(FrameData):
             output.write(struct.pack('!BBQ', head1, head2 | 127, length))
 
         if mask:
-            mask_bits = struct.pack('!I', random.getrandbits(32))
+            mask_bits = struct.pack('!I', secrets.SystemRandom().getrandbits(32))
             output.write(mask_bits)
 
         # Prepare the data.
