@@ -876,13 +876,13 @@ class SSLClientServerTests(ClientServerTests):
 
     @property
     def server_context(self):
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         ssl_context.load_cert_chain(testcert)
         return ssl_context
 
     @property
     def client_context(self):
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         ssl_context.load_verify_locations(testcert)
         ssl_context.verify_mode = ssl.CERT_REQUIRED
         return ssl_context
